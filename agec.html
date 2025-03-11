@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বয়স ক্যালকুলেটর</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Dark Theme */
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 10px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            border: 2px solid #007bff;
+            animation: borderAnimation 5s infinite;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        @keyframes borderAnimation {
+            0% { border-color: #007bff; }
+            25% { border-color: #ff5722; }
+            50% { border-color: #4caf50; }
+            75% { border-color: #9c27b0; }
+            100% { border-color: #007bff; }
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .date-inputs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .date-inputs select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #333;
+            color: #fff;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .result {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .result p {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #fff;
+            padding: 10px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #333;
+        }
+
+        .result span {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #888;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Light Theme */
+        .light-theme {
+            background-color: #ffffff;
+            color: #121212;
+        }
+
+        .light-theme .container {
+            background-color: #f4f4f9;
+            color: #121212;
+        }
+
+        .light-theme .date-inputs select {
+            background-color: #fff;
+            color: #121212;
+            border: 1px solid #ccc;
+        }
+
+        .light-theme .result p {
+            color: #121212;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+        }
+
+        .light-theme button {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .light-theme button:hover {
+            background-color: #0056b3;
+        }
+
+        .light-theme .footer {
+            color: #666;
+        }
+
+        .light-theme .footer a {
+            color: #007bff;
+        }
+
+        .theme-toggle {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .theme-toggle:hover {
+            background-color: #555;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>বয়স ক্যালকুলেটর</h1>
+        <div class="date-inputs">
+            <select id="day">
+                <option value="">দিন</option>
+                <!-- Days 1 to 31 -->
+                <script>
+                    for (let i = 1; i <= 31; i++) {
+                        document.write(`<option value="${i}">${i < 10 ? '0' + i : i}</option>`);
+                    }
+                </script>
+            </select>
+            <select id="month">
+                <option value="">মাস</option>
+                <option value="1">জানুয়ারি</option>
+                <option value="2">ফেব্রুয়ারি</option>
+                <option value="3">মার্চ</option>
+                <option value="4">এপ্রিল</option>
+                <option value="5">মে</option>
+                <option value="6">জুন</option>
+                <option value="7">জুলাই</option>
+                <option value="8">আগস্ট</option>
+                <option value="9">সেপ্টেম্বর</option>
+                <option value="10">অক্টোবর</option>
+                <option value="11">নভেম্বর</option>
+                <option value="12">ডিসেম্বর</option>
+            </select>
+            <select id="year">
+                <option value="">বছর</option>
+                <!-- Years 1900 to current year -->
+                <script>
+                    const currentYear = new Date().getFullYear();
+                    for (let i = currentYear; i >= 1900; i--) {
+                        document.write(`<option value="${i}">${i}</option>`);
+                    }
+                </script>
+            </select>
+        </div>
+        <button id="calculate-btn">বয়স বের করুন</button>
+        <div class="result" id="result">
+            <p>আপনার বয়স: <span id="age"></span></p>
+            <p>মোট দিন: <span id="total-days"></span></p>
+            <p>মোট সময়: <span id="total-hours"></span> ঘন্টা, <span id="total-minutes"></span> মিনিট, <span id="total-seconds"></span> সেকেন্ড</p>
+        </div>
+        <button class="theme-toggle" id="toggle-theme">থিম পরিবর্তন করুন</button>
+        <div class="footer">
+            Powered by <a href="https://t.me/sourov_ray" target="_blank">SoURoV</a>
+        </div>
+    </div>
+
+    <script>
+        // Elements
+        const dayInput = document.getElementById("day");
+        const monthInput = document.getElementById("month");
+        const yearInput = document.getElementById("year");
+        const calculateBtn = document.getElementById("calculate-btn");
+        const ageResult = document.getElementById("age");
+        const totalDaysResult = document.getElementById("total-days");
+        const totalHoursResult = document.getElementById("total-hours");
+        const totalMinutesResult = document.getElementById("total-minutes");
+        const totalSecondsResult = document.getElementById("total-seconds");
+        const toggleThemeBtn = document.getElementById("toggle-theme");
+
+        // Calculate age function
+        calculateBtn.addEventListener("click", () => {
+            const day = parseInt(dayInput.value);
+            const month = parseInt(monthInput.value);
+            const year = parseInt(yearInput.value);
+
+            if (isNaN(day) || isNaN(month) || isNaN(year)) {
+                alert("দয়া করে সঠিক তারিখ নির্বাচন করুন!");
+                return;
+            }
+
+            const dob = new Date(year, month - 1, day);
+            const now = new Date();
+
+            if (dob > now) {
+                alert("ভুল তারিখ নির্বাচন করেছেন!");
+                return;
+            }
+
+            const ageInMilliseconds = now - dob;
+            const ageInSeconds = ageInMilliseconds / 1000;
+            const ageInMinutes = ageInSeconds / 60;
+            const ageInHours = ageInMinutes / 60;
+            const ageInDays = ageInHours / 24;
+
+            const years = Math.floor(ageInDays / 365);
+            const months = Math.floor((ageInDays % 365) / 30);
+            const days = Math.floor((ageInDays % 365) % 30);
+            const totalDays = Math.floor(ageInDays);
+            const totalHours = Math.floor(ageInHours);
+            const totalMinutes = Math.floor(ageInMinutes);
+            const totalSeconds = Math.floor(ageInSeconds);
+
+            ageResult.textContent = `${years} বছর ${months} মাস ${days} দিন`;
+            totalDaysResult.textContent = totalDays;
+            totalHoursResult.textContent = totalHours;
+            totalMinutesResult.textContent = totalMinutes;
+            totalSecondsResult.textContent = totalSeconds;
+        });
+
+        // Theme toggle function
+        toggleThemeBtn.addEventListener("click", () => {
+            document.body.classList.toggle("light-theme");
+        });
+    </script>
+</body>
+</html>
